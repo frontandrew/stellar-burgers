@@ -5,6 +5,7 @@
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "module": "ESNext",
     "skipLibCheck": true,
+    "sourceMap": true,
 
     /* Bundler mode */
     "moduleResolution": "bundler",
@@ -18,7 +19,17 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+
+    /* Global paths */
+    "baseUrl": "./src",
+    "paths": {
+      "assets/*": ["./shared/assets/*"],
+      "entities/*": ["./entities/*"],
+      "features/*": ["./features/*"],
+      "pages": ["./pages/index"],
+      "uikit": ["./shared/uikit/index"],
+    },
   },
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]
