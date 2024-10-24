@@ -1,0 +1,32 @@
+.container {
+    width: 100%;
+    padding: 1em;
+
+    display: flex;
+    justify-content: center;
+
+    box-sizing: border-box;
+
+    background: var(--interface-modal-bg, #1C1C21);
+    box-shadow: 0px 24px 32px 0px rgba(0, 0, 0, 0.04), 0px 16px 24px 0px rgba(0, 0, 0, 0.04), 0px 4px 8px 0px rgba(0, 0, 0, 0.04), 0px 0px 1px 0px rgba(0, 0, 0, 0.04);
+}
+
+.list {
+    margin: unset;
+    padding: unset;
+    width: 100%;
+
+    display: flex;
+    gap: 0.5em;
+}
+
+.item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.itemLogo {
+    composes: item;
+    flex-grow: 1;
+}

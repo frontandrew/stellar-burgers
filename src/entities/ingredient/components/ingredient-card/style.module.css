@@ -1,0 +1,25 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    gap: 0.25em;
+    position: relative;
+}
+
+.image {
+    min-width: 180px;
+    min-height: 120px;
+    object-fit: cover;
+}
+
+.price {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.name {
+    /* height: 24px; */
+    text-align: center;
+}
