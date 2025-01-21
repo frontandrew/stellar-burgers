@@ -6,7 +6,7 @@
     "url": "https://github.com/frontandrew"
   },
   "private": false,
-  "version": "0.5.1",
+  "version": "0.6.0",
   "homepage": "https://frontandrew.github.io/stellar-burgers/",
   "type": "module",
   "scripts": {
