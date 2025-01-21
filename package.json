@@ -6,7 +6,7 @@
     "url": "https://github.com/frontandrew"
   },
   "private": false,
-  "version": "0.5.0",
+  "version": "0.5.1",
   "homepage": "https://frontandrew.github.io/stellar-burgers/",
   "type": "module",
   "scripts": {
@@ -19,10 +19,10 @@
   "dependencies": {
     "@babel/runtime": "^7.25.4",
     "@reduxjs/toolkit": "^2.3.0",
-    "@ya.praktikum/react-developer-burger-ui-components": "1.14.2",
     "core-js": "^3.38.1",
     "lodash-es": "^4.17.21",
     "nanoid": "^5.0.8",
+    "plural-ru": "^2.0.2",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-dnd": "^16.0.1",
@@ -41,6 +41,7 @@
     "@typescript-eslint/eslint-plugin": "^6.14.0",
     "@typescript-eslint/parser": "^6.14.0",
     "@vitejs/plugin-react": "^4.2.1",
+    "clsx": "^2.1.1",
     "eslint": "^8.55.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.5",

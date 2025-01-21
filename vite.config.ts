@@ -23,7 +23,7 @@ export default defineConfig({
       hooks: path.resolve('src/shared/hooks/index'),
       pages: path.resolve('src/pages/index'),
       store: path.resolve('src/store/index'),
-      uikit: '@ya.praktikum/react-developer-burger-ui-components',
+      uikit: path.resolve('src/shared/uikit/index'),
       utils: path.resolve('src/shared/utils/index'),
     },
   },
