@@ -1,5 +1,5 @@
 import { PropsWithChildren } from 'react'
-import { IngredientType } from 'entities/ingredient'
+import { Ingredient, IngredientType } from 'entities/ingredient'
 
 import { BurgerConstructorIngredient } from '../../model'
 
@@ -10,3 +10,4 @@ interface Props {
 }
 
 export type BurgerConstructorItemProps = PropsWithChildren<Props>
+export type DropItemType = BurgerConstructorIngredient & Ingredient

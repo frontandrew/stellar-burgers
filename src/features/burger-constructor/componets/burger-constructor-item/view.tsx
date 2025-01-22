@@ -5,10 +5,10 @@ import { ConstructorElement } from 'uikit'
 
 import { IngredientBurger, IngredientType, IngredientViewType } from 'entities/ingredient'
 
-import { burgerConstructorSlice, BurgerConstructorIngredient } from '../../model'
+import { burgerConstructorSlice } from '../../model'
 import { IngredientItemDNDWrapper } from '../ingredient-item-dnd-wrapper'
 
-import { BurgerConstructorItemProps } from './type'
+import { BurgerConstructorItemProps, DropItemType } from './type'
 import style from './style.module.css'
 
 export const BurgerConstructorItem: FC<BurgerConstructorItemProps> = ({
@@ -30,7 +30,7 @@ export const BurgerConstructorItem: FC<BurgerConstructorItemProps> = ({
     dispatch(removeIngredient({ orderId: ingr?.inBurgerConstructorIndex, ingrId: ingr?.id }))
   }, [dispatch, ingr, removeIngredient])
 
-  const handleDrop: (x: BurgerConstructorIngredient) => void = useCallback((item) => {
+  const handleDrop: (x: DropItemType) => void = useCallback((item) => {
     if (!item.inBurgerConstructorIndex) {
 
       if (isBunType && ingr) dispatch(removeIngredient({
@@ -53,7 +53,7 @@ export const BurgerConstructorItem: FC<BurgerConstructorItemProps> = ({
     fromList: `${IngredientViewType.CARD}-${expectType}`,
   }), [expectType])
 
-  const [{ isOver }, dropAreaRef] = useDrop<BurgerConstructorIngredient, void, {
+  const [{ isOver }, dropAreaRef] = useDrop<DropItemType, void, {
     isOver: boolean
   }>({
     accept: Object.values(dndAcceptTypesMap),
