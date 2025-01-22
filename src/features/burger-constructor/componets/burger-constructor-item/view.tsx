@@ -27,16 +27,13 @@ export const BurgerConstructorItem: FC<BurgerConstructorItemProps> = ({
 
   const handleRemove = useCallback(() => {
     if (ingr)
-    dispatch(removeIngredient({ orderId: ingr?.inBurgerConstructorIndex, ingrId: ingr?.id }))
+    dispatch(removeIngredient(ingr?.inBurgerConstructorIndex))
   }, [dispatch, ingr, removeIngredient])
 
   const handleDrop: (x: DropItemType) => void = useCallback((item) => {
     if (!item.inBurgerConstructorIndex) {
 
-      if (isBunType && ingr) dispatch(removeIngredient({
-        orderId: ingr.inBurgerConstructorIndex,
-        ingrId: ingr.id,
-      }))
+      if (isBunType && ingr) dispatch(removeIngredient(ingr.inBurgerConstructorIndex))
       dispatch(addIngredient({ item, targId: ingr?.inBurgerConstructorIndex }))
     } else dispatch(sortIngredients({
       currId: item.inBurgerConstructorIndex,

@@ -15,7 +15,7 @@ export const ingredientsSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => builder
     .addCase(removeIngredient, (state, { payload }) => state
-      .map((item) => item.id === payload.ingrId
+      .map((item) => item.id === payload
         ? { ...item, count: undefined }
         : item,
       ),
