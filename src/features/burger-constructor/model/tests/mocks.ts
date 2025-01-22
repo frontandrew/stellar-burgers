@@ -1,0 +1,58 @@
+import { Ingredient } from 'entities/ingredient'
+
+export const ingredientsMock: Ingredient[] = [
+  {
+    id: '643d69a5c3f7b9001cfa093c',
+    imageMobile: 'https://code.s3.yandex.net/react/code/bun-02-mobile.png',
+    imageLarge: 'https://code.s3.yandex.net/react/code/bun-02-large.png',
+    name: 'Краторная булка N-200i',
+    type: 'bun',
+    proteins: 80,
+    fat: 24,
+    carbohydrates: 53,
+    calories: 420,
+    price: 1255,
+    image: 'https://code.s3.yandex.net/react/code/bun-02.png',
+  },
+  {
+    id: '643d69a5c3f7b9001cfa0941',
+    imageMobile: 'https://code.s3.yandex.net/react/code/meat-01-mobile.png',
+    imageLarge: 'https://code.s3.yandex.net/react/code/meat-01-large.png',
+    name: 'Биокотлета из марсианской Магнолии',
+    type: 'main',
+    proteins: 420,
+    fat: 142,
+    carbohydrates: 242,
+    calories: 4242,
+    price: 424,
+    image: 'https://code.s3.yandex.net/react/code/meat-01.png',
+  },
+  {
+    id: '643d69a5c3f7b9001cfa093e',
+    imageMobile: 'https://code.s3.yandex.net/react/code/meat-03-mobile.png',
+    imageLarge: 'https://code.s3.yandex.net/react/code/meat-03-large.png',
+    name: 'Филе Люминесцентного тетраодонтимформа',
+    type: 'main',
+    proteins: 44,
+    fat: 26,
+    carbohydrates: 85,
+    calories: 643,
+    price: 988,
+    image: 'https://code.s3.yandex.net/react/code/meat-03.png',
+  },
+  {
+    id: '643d69a5c3f7b9001cfa0942',
+    imageMobile: 'https://code.s3.yandex.net/react/code/sauce-02-mobile.png',
+    imageLarge: 'https://code.s3.yandex.net/react/code/sauce-02-large.png',
+    name: 'Соус Spicy-X',
+    type: 'sauce',
+    proteins: 30,
+    fat: 20,
+    carbohydrates: 40,
+    calories: 30,
+    price: 90,
+    image: 'https://code.s3.yandex.net/react/code/sauce-02.png',
+  },
+]
+
+

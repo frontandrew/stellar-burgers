@@ -14,7 +14,7 @@ import {
   removeIngredient,
 } from './utils'
 
-const initState: BurgerConstructorState = {
+export const initState: BurgerConstructorState = {
   ingredients: [],
   total: 0,
   isReady: false,
