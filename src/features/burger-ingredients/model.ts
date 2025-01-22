@@ -6,7 +6,7 @@ import { burgerConstructorSlice } from 'features/burger-constructor'
 
 const { addIngredient, removeIngredient, resetConstructorState } = burgerConstructorSlice.actions
 
-const initState: Ingredient[] = []
+export const initState: Ingredient[] = []
 
 export const ingredientsSlice = createSlice({
   name: 'ingredients',
