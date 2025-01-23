@@ -48,6 +48,7 @@ export const ProfileForm: FC = () => {
       className={style.form}
     >
       <Input
+        data-test-id={'name-input'}
         onIconClick={enableEditMode}
         onChange={()=>{}}
         onBlur={checkFieldValidity}
@@ -63,6 +64,7 @@ export const ProfileForm: FC = () => {
         {...{ icon: isEditMode ? undefined : 'EditIcon' }}
       />
       <EmailInput
+        data-test-id={'email-input'}
         // @ts-expect-error-next-line
         onIconClick={enableEditMode}
         onBlur={checkFieldValidity}

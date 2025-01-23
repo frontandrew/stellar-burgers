@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useLocation } from 'react-router-dom'
 
 import { Button, EmailInput, PasswordInput } from 'uikit'
 import { useForm } from 'hooks'
@@ -9,6 +9,7 @@ import style from './style.module.css'
 
 export const LoginPage: FC = () => {
   const [handleLogin] = apiSlice.useLazyLoginUserQuery()
+  const location = useLocation()
 
   const {
     formRef,
@@ -20,7 +21,10 @@ export const LoginPage: FC = () => {
     checkFieldValidity,
     debounceCheckFieldValidity
   } = useForm({
-    submitHandler: handleLogin,
+    submitHandler: (credentials) => {
+      handleLogin(credentials)
+      location.state = { from: '/' }
+    },
     formInitValues: { email: '', password: '' },
   })
 
@@ -34,6 +38,7 @@ export const LoginPage: FC = () => {
       >
         <h1 className={'text text_type_main-medium'}>Вход</h1>
         <EmailInput
+          data-test-id={'email-input'}
           placeholder={'E-mail'}
           value={formValues.email ?? ''}
           name={'email'}
@@ -46,6 +51,7 @@ export const LoginPage: FC = () => {
           error={!!formErrors.email}
         />
         <PasswordInput
+          data-test-id={'password-input'}
           placeholder={'Пароль'}
           value={formValues.password ?? ''}
           name={'password'}
@@ -59,6 +65,7 @@ export const LoginPage: FC = () => {
           error={!!formErrors.password}
         />
         <Button
+          data-test-id={'login-submit'}
           htmlType={'submit'}
           disabled={!formValidity}
           tabIndex={3}
