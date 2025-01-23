@@ -15,7 +15,8 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "deploy": "rm -rf dist && tsc && eslint . --ext ts,tsx && vitest run && vite build && gh-pages -d dist",
-    "test": "vitest"
+    "test:unit": "vitest",
+    "test:e2e": "cypress open"
   },
   "dependencies": {
     "@babel/runtime": "^7.25.4",
