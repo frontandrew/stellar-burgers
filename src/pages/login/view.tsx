@@ -17,7 +17,8 @@ export const LoginPage: FC = () => {
     formErrors,
     formValidity,
     formSubmit,
-    checkFieldValidity
+    checkFieldValidity,
+    debounceCheckFieldValidity
   } = useForm({
     submitHandler: handleLogin,
     formInitValues: { email: '', password: '' },
@@ -37,25 +38,25 @@ export const LoginPage: FC = () => {
           value={formValues.email ?? ''}
           name={'email'}
           onBlur={checkFieldValidity}
+          onChange={debounceCheckFieldValidity}
           required={true}
           tabIndex={1}
           errorText={formErrors.email}
           // @ts-expect-error-next-line
           error={!!formErrors.email}
-          onChange={()=>{}}
         />
         <PasswordInput
           placeholder={'Пароль'}
           value={formValues.password ?? ''}
           name={'password'}
           onBlur={checkFieldValidity}
+          onChange={debounceCheckFieldValidity}
           minLength={6}
           required={true}
           tabIndex={2}
           errorText={formErrors.password}
           // @ts-expect-error-next-line
           error={!!formErrors.password}
-          onChange={()=>{}}
         />
         <Button
           htmlType={'submit'}
