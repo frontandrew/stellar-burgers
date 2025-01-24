@@ -5,25 +5,12 @@ import { ingredientsSlice, initState } from '../'
 import { ingredientsMock } from './mocks'
 import { Ingredient, IngredientType } from 'entities/ingredient'
 
-const { reducerPath, reducer } = ingredientsSlice
-const actions = {
-  setIngredientsAction: (agr: Ingredient[]) => ({
+const { reducerPath, reducer, actions } = ingredientsSlice
+const setIngredientsAction = (agr: Ingredient[]) => ({
     meta: { arg: { endpointName: 'getIngredients' } },
     type: 'appApi/executeQuery/fulfilled',
     payload: agr,
-  }),
-  increaseIngredientCount: (agr: Ingredient) => ({
-    type: 'burgerConstructor/addIngredient',
-    payload: { item: agr },
-  }),
-  decreaseIngredientCount: (arg: string) => ({
-    type: 'burgerConstructor/removeIngredient',
-    payload: arg,
-  }),
-  resetAllIngredientsCounts: () => ({
-    type: 'burgerConstructor/resetConstructorState',
-  }),
-}
+  })
 
 describe('Ingredients state', () => {
   const store = configureStore({ reducer: { [reducerPath]: reducer } })
@@ -38,7 +25,7 @@ describe('Ingredients state', () => {
     expect(store.getState().ingredients).toEqual(initState)
   })
   test(`should be filled with ingredients on 'getIngredients/fulfilled' action`, () => {
-    store.dispatch(actions.setIngredientsAction(ingredientsMock))
+    store.dispatch(setIngredientsAction(ingredientsMock))
 
     expect(store.getState().ingredients).toHaveLength(ingredientsMock.length)
   })
@@ -48,7 +35,7 @@ describe('Ingredients state', () => {
       const bunTypeIngredient = store.getState().ingredients
         .filter(({ type }) => type === IngredientType.BUN)[0]
 
-      store.dispatch(actions.increaseIngredientCount(bunTypeIngredient))
+      store.dispatch(actions.increaseItemCount(bunTypeIngredient.id))
 
       const result = store.getState().ingredients.find(({ id }) => id === bunTypeIngredient.id)
       expect(result?.count).toEqual(2)
@@ -57,7 +44,7 @@ describe('Ingredients state', () => {
       const notBunTypeIngredient = store.getState().ingredients
         .filter(({ type }) => type !== IngredientType.BUN)[0]
 
-      store.dispatch(actions.increaseIngredientCount(notBunTypeIngredient))
+      store.dispatch(actions.increaseItemCount(notBunTypeIngredient.id))
 
       const result = store.getState().ingredients.find(({ id }) => id === notBunTypeIngredient.id)
       expect(result?.count).toEqual(1)
@@ -69,7 +56,7 @@ describe('Ingredients state', () => {
       const bunTypeIngredient = store.getState().ingredients
         .filter(({ type, count }) => type === IngredientType.BUN && count === 2)[0]
 
-      store.dispatch(actions.decreaseIngredientCount(bunTypeIngredient.id))
+      store.dispatch(actions.decreaseItemCount(bunTypeIngredient.id))
 
       const result = store.getState().ingredients.find(({ id }) => id === bunTypeIngredient.id)
       expect(result?.count).toBeUndefined()
@@ -78,7 +65,7 @@ describe('Ingredients state', () => {
       const notBunTypeIngredient = store.getState().ingredients
         .filter(({ type, count }) => type !== IngredientType.BUN && count === 1)[0]
 
-      store.dispatch(actions.decreaseIngredientCount(notBunTypeIngredient.id))
+      store.dispatch(actions.decreaseItemCount(notBunTypeIngredient.id))
 
       const result = store.getState().ingredients.find(({ id }) => id === notBunTypeIngredient.id)
       expect(result?.count).toBeUndefined()
@@ -86,7 +73,7 @@ describe('Ingredients state', () => {
   })
 
   test(`should be reset all ingredients counts to undefined on 'burgerConstructor/resetConstructorState' action`, () => {
-    store.dispatch(actions.resetAllIngredientsCounts())
+    store.dispatch(actions.resetAllItemsCount())
 
     const result = store.getState().ingredients.some(({ count }) => count)
     expect(result).toBeFalsy()

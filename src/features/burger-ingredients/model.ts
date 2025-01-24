@@ -13,7 +13,7 @@ export const ingredientsSlice = createSlice({
     decreaseItemCount: (state, { payload }: PayloadAction<string>) => state.map((item) => {
       if (item.id === payload) {
         const { type, count } = item
-        const nextCount = type !== IngredientType.BUN && count ? count - 1 : undefined
+        const nextCount = type !== IngredientType.BUN && count && count > 1 ? count - 1 : undefined
         return { ...item, count: nextCount }
       }
 
