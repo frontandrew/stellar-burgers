@@ -11,12 +11,14 @@
   "type": "module",
   "scripts": {
     "dev": "vite --open",
-    "build": "rm -rf dist && tsc && eslint . --ext ts,tsx && vitest run && cypress run && vite build",
-    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
+    "build": "rm -rf dist && tsc && eslint . --ext ts,tsx && vitest run && cypress run && vite build",
     "deploy": "rm -rf dist && tsc && eslint . --ext ts,tsx && vitest run && cypress run && vite build && gh-pages -d dist",
+    "test:lint": "eslint . --ext ts,tsx",
+    "test:type": "tsc",
     "test:unit": "vitest",
-    "test:e2e": "cypress open"
+    "test:e2e": "cypress open",
+    "test": "eslint . --ext ts,tsx && tsc && vitest run && cypress run"
   },
   "dependencies": {
     "@babel/runtime": "^7.25.4",
