@@ -4,8 +4,9 @@ import { useAppDispatch } from 'hooks'
 import { ConstructorElement } from 'uikit'
 
 import { IngredientBurger, IngredientType, IngredientViewType } from 'entities/ingredient'
+import { ingredientsSlice } from 'features/burger-ingredients'
 
-import { burgerConstructorSlice } from '../../model'
+import { burgerConstructorSlice as bCS } from '../../model'
 import { IngredientItemDNDWrapper } from '../ingredient-item-dnd-wrapper'
 
 import { BurgerConstructorItemProps, DropItemType } from './type'
@@ -16,33 +17,41 @@ export const BurgerConstructorItem: FC<BurgerConstructorItemProps> = ({
   position,
   expectType,
 }) => {
+  const { addIngredient, removeIngredient, sortIngredients } = bCS.actions
+  const { decreaseItemCount, increaseItemCount } = ingredientsSlice.actions
   const isBunType = expectType === IngredientType.BUN
-
-  const {
-    addIngredient,
-    removeIngredient,
-    sortIngredients,
-  } = burgerConstructorSlice.actions
   const dispatch = useAppDispatch()
 
   const handleRemove = useCallback(() => {
-    if (ingr)
-    dispatch(removeIngredient({ orderId: ingr?.inBurgerConstructorIndex, ingrId: ingr?.id }))
-  }, [dispatch, ingr, removeIngredient])
+    if (ingr) {
+      dispatch(removeIngredient(ingr.inBurgerConstructorIndex))
+      dispatch(decreaseItemCount(ingr.id))
+    }
+  }, [decreaseItemCount, dispatch, ingr, removeIngredient])
 
   const handleDrop: (x: DropItemType) => void = useCallback((item) => {
     if (!item.inBurgerConstructorIndex) {
 
-      if (isBunType && ingr) dispatch(removeIngredient({
-        orderId: ingr.inBurgerConstructorIndex,
-        ingrId: ingr.id,
-      }))
+      if (isBunType && ingr) {
+        dispatch(removeIngredient(ingr.inBurgerConstructorIndex))
+        dispatch(decreaseItemCount(ingr.id))
+      }
       dispatch(addIngredient({ item, targId: ingr?.inBurgerConstructorIndex }))
+      dispatch(increaseItemCount(item.id))
     } else dispatch(sortIngredients({
       currId: item.inBurgerConstructorIndex,
       targId: ingr!.inBurgerConstructorIndex,
     }))
-  }, [addIngredient, dispatch, ingr, isBunType, removeIngredient, sortIngredients])
+  }, [
+    addIngredient,
+    decreaseItemCount,
+    dispatch,
+    increaseItemCount,
+    ingr,
+    isBunType,
+    removeIngredient,
+    sortIngredients
+  ])
 
   /**
    * TODO: вынести вычисление принимаемых типов в отдельную
