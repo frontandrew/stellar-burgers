@@ -1,9 +1,9 @@
-import type {} from 'cypress'
+/// <reference types="cypress" />
 
 import { testParams } from '../constants'
 
 describe('Application authentication', () => {
-  it('should provide access to the profile page', async () => {
+  it('should provide access to the profile page', () => {
     const { email, password, name } = testParams
 
     cy.intercept('POST', '**/login', { fixture: 'login'}).as('login')

@@ -75,7 +75,11 @@ export const BurgerConstructorItem: FC<BurgerConstructorItemProps> = ({
   ], [isBunType, isOver, ingr])
 
   return (
-    <li className={style.container} ref={dropAreaRef}>
+    <li
+      data-test-id={'constructor-item'}
+      className={style.container}
+      ref={dropAreaRef}
+    >
       <div className={dropAreaStyles}>
         <div className={style.empty_container}>
           <div className={style.empty_item}>
