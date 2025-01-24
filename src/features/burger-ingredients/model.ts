@@ -14,12 +14,16 @@ export const ingredientsSlice = createSlice({
   selectors: { getState: (state) => state },
   reducers: {},
   extraReducers: (builder) => builder
-    .addCase(removeIngredient, (state, { payload }) => state
-      .map((item) => item.id === payload
-        ? { ...item, count: undefined }
-        : item,
-      ),
-    )
+    .addCase(removeIngredient, (state, { payload }) => state.map((item) => {
+
+      if (item.id === payload.ingrId) {
+        const { type, count } = item
+        const nextCount = type !== IngredientType.BUN && count ? count - 1 : undefined
+        return { ...item, count: nextCount }
+      }
+
+      return item
+    }))
     .addCase(addIngredient, (state, { payload }) => state
       .map((item) => {
         if (item.id === payload.item.id) {
@@ -44,4 +48,4 @@ export const ingredientsSlice = createSlice({
 export const selectIngredientsByIds = createSelector(
   [ingredientsSlice.selectors.getState, (_, ids: string[]) => ids],
   (state, index: string[]) => index.map((idx) => state.find(({ id }) => id === idx)),
-);
+)

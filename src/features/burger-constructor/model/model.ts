@@ -35,8 +35,8 @@ export const burgerConstructorSlice = createSlice({
         state.total = calcTotal(state.ingredients)
       },
     },
-    removeIngredient: (state, { payload }: PayloadAction<string>) => {
-      state.ingredients = removeIngredient(state.ingredients, payload)
+    removeIngredient: (state, { payload }: PayloadAction<{ orderId: string, ingrId: string }>) => {
+      state.ingredients = removeIngredient(state.ingredients, payload.orderId)
       state.isReady = checkIsReady(state.ingredients, ORDER_MIN_LENGTH)
       state.total = calcTotal(state.ingredients)
     },
