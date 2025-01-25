@@ -2,15 +2,8 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import path from 'path'
 
-/**
- * This root path used for deploy to GH-Pages
- */
-const basePath = process.env.NODE_ENV === 'production'
-  ? '/stellar-burgers'
-  : '/'
-
 export default defineConfig({
-  base: basePath,
+  base: '/',
   plugins: [react()],
   server: { port: 3002 },
   resolve: {
