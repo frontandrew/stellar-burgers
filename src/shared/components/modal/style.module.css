@@ -26,6 +26,13 @@
 	position: absolute;
 	top: 3.75em;
 	right: 2.5em;
+
+	width: min-content;
+	height: min-content;
+
+	padding: unset;
+	background: unset;
+	border: unset;
 }
 
 .content {
