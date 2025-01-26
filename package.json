@@ -21,7 +21,6 @@
   "dependencies": {
     "@babel/runtime": "^7.25.4",
     "@reduxjs/toolkit": "^2.3.0",
-    "@siberiacancode/reactuse": "^0.0.78",
     "core-js": "^3.38.1",
     "lodash-es": "^4.17.21",
     "nanoid": "^5.0.8",
