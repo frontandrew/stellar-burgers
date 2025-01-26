@@ -1,19 +1,23 @@
-# 🛸 Stellar Burgers
+# 🛸 **Stellar Burgers** `0.6.0`
 
 ![Screenshot](https://github.com/user-attachments/assets/f2a6f314-4627-4e15-b294-2b7672e2a4dd)
 
-#### Hungry for burger?!
+<h2 style=width:100%;text-align:center;>
+  Try to use app with 
+  <a href="https://stellar-burgers-flame.vercel.app">LIVE DEMO</a>
+</h2>
 
-[![MIT Licence](https://badges.frapsoft.com/os/mit/mit.svg)](https://opensource.org/licenses/mit-license.php)
+---
 
-### Start and use:
+### Project features:
 
-- clone repo
-- install dependencies: `npm ci`
-- for create build run: `npm run build`
-- for use build localy run: `npm run start`
-- for use dev-server run: `npm run dev`
-- for check code: `npm run lint`
+- Get information about the burger parts
+- Craft burger by your own receipt
+- Follow the execution process
+- Look at your order history
+- Get statistics about other users' orders
+
+---
 
 ### Used tools:
 
@@ -29,13 +33,25 @@
 - [Vite](https://vitejs.dev/) - a build tool that aims to provide a faster and leaner development experience for modern
   web projects
 - [ESLint](https://eslint.org/) - statically analyzes your code to quickly find problems
-
-### Project features:
-
-- in progress
+- [Vitest](https://vitest.dev/) - next generation testing framework
+- [Cypress](https://cypress.io/) - test modern apps directly in your browser
 
 ---
 
-#### Templates: [Figma](https://www.figma.com/design/TbuS5lWzTxGut4DkvaSV8v/React-_-%D0%9F%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%BD%D1%8B%D0%B5-%D0%B7%D0%B0%D0%B4%D0%B0%D1%87%D0%B8_external_link-(Copy))
+### Start and use:
 
-#### Live action: [GH-Pages](https://frontandrew.github.io/stellar-burgers/)
+- clone repo
+- install dependencies: `npm ci`
+- for create build run: `npm run build`
+- for use dev-server run: `npm run dev`
+- for use build locally run: `npm run preview`
+- for static check code by linter: `npm run test:lint`
+- for static check typing: `npm run test:type`
+- for unit testing code base: `npm run test:unit`
+- for end-to-end testing: `npm run test:e2e`
+
+
+---
+
+> #### Templates: [Figma](https://www.figma.com/design/TbuS5lWzTxGut4DkvaSV8v/React-_-%D0%9F%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%BD%D1%8B%D0%B5-%D0%B7%D0%B0%D0%B4%D0%B0%D1%87%D0%B8_external_link-(Copy))
+

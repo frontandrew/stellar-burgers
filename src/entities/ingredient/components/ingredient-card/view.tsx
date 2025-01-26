@@ -1,6 +1,7 @@
 import { FC, useMemo } from 'react'
 import { useDrag } from 'react-dnd'
 import { Link, useLocation } from 'react-router-dom'
+import { PriceWithCurrency } from 'components'
 import { Counter } from 'uikit'
 
 import { IngredientType } from '../../type'
@@ -8,11 +9,9 @@ import { IngredientViewType } from '../type'
 
 import { IngredientCardProps } from './type'
 import style from './style.module.css'
-import { PriceWithCurrency } from 'components'
 
 export const IngredientCard: FC<IngredientCardProps> = ({ ingredient }) => {
   const { image = '', id, name = 'unknown', price = 0, type, count = 0 } = ingredient
-
   const location = useLocation()
 
   /**
@@ -31,9 +30,9 @@ export const IngredientCard: FC<IngredientCardProps> = ({ ingredient }) => {
     }),
   })
 
-
   const ingredientCard = (
     <li
+      data-test-id={`ingredient-card-${type}`}
       key={id}
       ref={cardRef}
       className={style.container}
@@ -45,7 +44,12 @@ export const IngredientCard: FC<IngredientCardProps> = ({ ingredient }) => {
       >
         <img className={style.image} src={image} alt={name}/>
         <PriceWithCurrency value={price}/>
-        <span className={'text text_type_main-default ' + style.name}>{name}</span>
+        <span
+          data-test-id={`ingredient-card-name`}
+          className={'text text_type_main-default ' + style.name}
+        >
+          {name}
+        </span>
         {count > 0 &&
           <Counter
             count={count}
@@ -55,7 +59,6 @@ export const IngredientCard: FC<IngredientCardProps> = ({ ingredient }) => {
         }
       </Link>
     </li>
-
   )
 
   return id && name && price ? ingredientCard : null

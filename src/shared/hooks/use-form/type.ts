@@ -1,4 +1,4 @@
-import { FocusEvent, FormEvent, MutableRefObject } from 'react'
+import { ChangeEvent, FocusEvent, FormEvent, MutableRefObject } from 'react'
 
 export type UseFormType = <T>(pros: { submitHandler: (args: T) => void, readonly formInitValues: T }) => {
   formRef: MutableRefObject<HTMLFormElement | null>
@@ -8,5 +8,6 @@ export type UseFormType = <T>(pros: { submitHandler: (args: T) => void, readonly
   formSubmit: (event: FormEvent<HTMLFormElement>) => void
   formReset: () => void
   formValidity: boolean
-  checkFieldValidity: (event?: FocusEvent<HTMLInputElement> | undefined) => void
+  checkFieldValidity: (event?: FocusEvent<HTMLInputElement> | ChangeEvent<HTMLInputElement> | undefined) => void
+  debounceCheckFieldValidity: (event?: ChangeEvent<HTMLInputElement> | undefined) => void
 }

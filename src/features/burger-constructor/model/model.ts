@@ -2,8 +2,10 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { genItemIndex } from 'utils'
 import { apiSlice } from 'api'
 
+import { Ingredient } from 'entities/ingredient'
+
 import { ORDER_MIN_LENGTH } from './const'
-import { BurgerConstructorState, BurgerConstructorIngredient } from './type'
+import { BurgerConstructorIngredient, BurgerConstructorState } from './type'
 import {
   addIngredient,
   calcTotal,
@@ -12,7 +14,7 @@ import {
   removeIngredient,
 } from './utils'
 
-const initState: BurgerConstructorState = {
+export const initState: BurgerConstructorState = {
   ingredients: [],
   total: 0,
   isReady: false,
@@ -24,8 +26,8 @@ export const burgerConstructorSlice = createSlice({
   selectors: { state: (state) => state },
   reducers: {
     addIngredient: {
-      prepare: ({ item, ...rest }: { item: BurgerConstructorIngredient, targId?: string }) => ({ payload: {
-        item: { ...item, inBurgerConstructorIndex: genItemIndex()}, ...rest }
+      prepare: ({ item, ...rest }: { item: Ingredient, targId?: string }) => ({ payload: {
+        item: { ...item, inBurgerConstructorIndex: genItemIndex() }, ...rest }
       }),
       reducer: (state, { payload }: PayloadAction<{ item: BurgerConstructorIngredient, targId?: string }>) => {
         state.ingredients = addIngredient(state.ingredients, payload.item, payload.targId)
@@ -33,8 +35,8 @@ export const burgerConstructorSlice = createSlice({
         state.total = calcTotal(state.ingredients)
       },
     },
-    removeIngredient: (state, { payload }: PayloadAction<{ orderId: string, ingrId: string }>) => {
-      state.ingredients = removeIngredient(state.ingredients, payload.orderId)
+    removeIngredient: (state, { payload }: PayloadAction<string>) => {
+      state.ingredients = removeIngredient(state.ingredients, payload)
       state.isReady = checkIsReady(state.ingredients, ORDER_MIN_LENGTH)
       state.total = calcTotal(state.ingredients)
     },

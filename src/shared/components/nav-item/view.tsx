@@ -12,6 +12,7 @@ export const NavItem: FC<NavItemProps> = ({ to, title, size = 'default', Icon })
 
   return (
     <Button
+      data-test-id={`navigate-${to.slice(1)}`}
       onClick={() => nav(to)}
       extraClass={style.item}
       htmlType='button'

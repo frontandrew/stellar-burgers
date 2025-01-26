@@ -37,5 +37,6 @@
     },
   },
   "include": ["src"],
+  "exclude": ["**/*.test.ts", "**/*.cy.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

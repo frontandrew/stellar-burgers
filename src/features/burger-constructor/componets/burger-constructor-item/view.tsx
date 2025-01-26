@@ -4,11 +4,12 @@ import { useAppDispatch } from 'hooks'
 import { ConstructorElement } from 'uikit'
 
 import { IngredientBurger, IngredientType, IngredientViewType } from 'entities/ingredient'
+import { ingredientsSlice } from 'features/burger-ingredients'
 
-import { burgerConstructorSlice, BurgerConstructorIngredient } from '../../model'
+import { burgerConstructorSlice as bCS } from '../../model'
 import { IngredientItemDNDWrapper } from '../ingredient-item-dnd-wrapper'
 
-import { BurgerConstructorItemProps } from './type'
+import { BurgerConstructorItemProps, DropItemType } from './type'
 import style from './style.module.css'
 
 export const BurgerConstructorItem: FC<BurgerConstructorItemProps> = ({
@@ -16,33 +17,41 @@ export const BurgerConstructorItem: FC<BurgerConstructorItemProps> = ({
   position,
   expectType,
 }) => {
+  const { addIngredient, removeIngredient, sortIngredients } = bCS.actions
+  const { decreaseItemCount, increaseItemCount } = ingredientsSlice.actions
   const isBunType = expectType === IngredientType.BUN
-
-  const {
-    addIngredient,
-    removeIngredient,
-    sortIngredients,
-  } = burgerConstructorSlice.actions
   const dispatch = useAppDispatch()
 
   const handleRemove = useCallback(() => {
-    if (ingr)
-    dispatch(removeIngredient({ orderId: ingr?.inBurgerConstructorIndex, ingrId: ingr?.id }))
-  }, [dispatch, ingr, removeIngredient])
+    if (ingr) {
+      dispatch(removeIngredient(ingr.inBurgerConstructorIndex))
+      dispatch(decreaseItemCount(ingr.id))
+    }
+  }, [decreaseItemCount, dispatch, ingr, removeIngredient])
 
-  const handleDrop: (x: BurgerConstructorIngredient) => void = useCallback((item) => {
+  const handleDrop: (x: DropItemType) => void = useCallback((item) => {
     if (!item.inBurgerConstructorIndex) {
 
-      if (isBunType && ingr) dispatch(removeIngredient({
-        orderId: ingr.inBurgerConstructorIndex,
-        ingrId: ingr.id,
-      }))
+      if (isBunType && ingr) {
+        dispatch(removeIngredient(ingr.inBurgerConstructorIndex))
+        dispatch(decreaseItemCount(ingr.id))
+      }
       dispatch(addIngredient({ item, targId: ingr?.inBurgerConstructorIndex }))
+      dispatch(increaseItemCount(item.id))
     } else dispatch(sortIngredients({
       currId: item.inBurgerConstructorIndex,
       targId: ingr!.inBurgerConstructorIndex,
     }))
-  }, [addIngredient, dispatch, ingr, isBunType, removeIngredient, sortIngredients])
+  }, [
+    addIngredient,
+    decreaseItemCount,
+    dispatch,
+    increaseItemCount,
+    ingr,
+    isBunType,
+    removeIngredient,
+    sortIngredients
+  ])
 
   /**
    * TODO: вынести вычисление принимаемых типов в отдельную
@@ -53,7 +62,7 @@ export const BurgerConstructorItem: FC<BurgerConstructorItemProps> = ({
     fromList: `${IngredientViewType.CARD}-${expectType}`,
   }), [expectType])
 
-  const [{ isOver }, dropAreaRef] = useDrop<BurgerConstructorIngredient, void, {
+  const [{ isOver }, dropAreaRef] = useDrop<DropItemType, void, {
     isOver: boolean
   }>({
     accept: Object.values(dndAcceptTypesMap),
@@ -78,7 +87,11 @@ export const BurgerConstructorItem: FC<BurgerConstructorItemProps> = ({
   ], [isBunType, isOver, ingr])
 
   return (
-    <li className={style.container} ref={dropAreaRef}>
+    <li
+      data-test-id={'constructor-item'}
+      className={style.container}
+      ref={dropAreaRef}
+    >
       <div className={dropAreaStyles}>
         <div className={style.empty_container}>
           <div className={style.empty_item}>

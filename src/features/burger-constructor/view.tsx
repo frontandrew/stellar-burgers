@@ -13,6 +13,7 @@ import { userSlice } from 'entities/user'
 import { burgerConstructorSlice as model } from './model'
 import { BurgerConstructorItem } from './componets'
 import style from './style.module.css'
+import { ingredientsSlice } from 'features/burger-ingredients'
 
 export const BurgerConstructor: FC = () => {
   const navigate = useNavigate()
@@ -20,8 +21,9 @@ export const BurgerConstructor: FC = () => {
 
   const user = useAppSelector(userSlice.selectors.user)
   const { ingredients, isReady, orderNumber, total } = useAppSelector(model.selectors.state)
-  const { resetConstructorState } = model.actions
+  const { resetAllItemsCount } = ingredientsSlice.actions
   const [postOrder] = apiSlice.usePostOrderMutation()
+  const { resetConstructorState } = model.actions
 
   const [bun, otherIngredients] = useMemo(() => [
     ingredients.find(({ type }) => type === IngredientType.BUN),
@@ -30,7 +32,10 @@ export const BurgerConstructor: FC = () => {
 
 
   const { isModalOpen, closeModal, openModal } = useModal({
-    closeHandler: () => dispatch(resetConstructorState()),
+    closeHandler: () => {
+      dispatch(resetConstructorState())
+      dispatch(resetAllItemsCount())
+    },
   })
 
   const handleOrderSubmit = useCallback((e: SyntheticEvent) => {

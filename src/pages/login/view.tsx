@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useLocation } from 'react-router-dom'
 
 import { Button, EmailInput, PasswordInput } from 'uikit'
 import { useForm } from 'hooks'
@@ -9,6 +9,7 @@ import style from './style.module.css'
 
 export const LoginPage: FC = () => {
   const [handleLogin] = apiSlice.useLazyLoginUserQuery()
+  const location = useLocation()
 
   const {
     formRef,
@@ -17,9 +18,13 @@ export const LoginPage: FC = () => {
     formErrors,
     formValidity,
     formSubmit,
-    checkFieldValidity
+    checkFieldValidity,
+    debounceCheckFieldValidity
   } = useForm({
-    submitHandler: handleLogin,
+    submitHandler: (credentials) => {
+      handleLogin(credentials)
+      location.state = { from: '/' }
+    },
     formInitValues: { email: '', password: '' },
   })
 
@@ -33,31 +38,34 @@ export const LoginPage: FC = () => {
       >
         <h1 className={'text text_type_main-medium'}>Вход</h1>
         <EmailInput
+          data-test-id={'email-input'}
           placeholder={'E-mail'}
           value={formValues.email ?? ''}
           name={'email'}
           onBlur={checkFieldValidity}
+          onChange={debounceCheckFieldValidity}
           required={true}
           tabIndex={1}
           errorText={formErrors.email}
           // @ts-expect-error-next-line
           error={!!formErrors.email}
-          onChange={()=>{}}
         />
         <PasswordInput
+          data-test-id={'password-input'}
           placeholder={'Пароль'}
           value={formValues.password ?? ''}
           name={'password'}
           onBlur={checkFieldValidity}
+          onChange={debounceCheckFieldValidity}
           minLength={6}
           required={true}
           tabIndex={2}
           errorText={formErrors.password}
           // @ts-expect-error-next-line
           error={!!formErrors.password}
-          onChange={()=>{}}
         />
         <Button
+          data-test-id={'login-submit'}
           htmlType={'submit'}
           disabled={!formValidity}
           tabIndex={3}

@@ -6,15 +6,17 @@
     "url": "https://github.com/frontandrew"
   },
   "private": false,
-  "version": "0.5.1",
+  "version": "0.6.0",
   "homepage": "https://frontandrew.github.io/stellar-burgers/",
   "type": "module",
   "scripts": {
     "dev": "vite --open",
-    "build": "rm -rf dist && tsc && eslint . --ext ts,tsx && vite build",
-    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "deploy": "rm -rf dist && tsc && eslint . --ext ts,tsx && vite build && gh-pages -d dist"
+    "build": "vite build",
+    "test:lint": "eslint . --ext ts,tsx",
+    "test:type": "tsc",
+    "test:unit": "vitest",
+    "test:e2e": "cypress open"
   },
   "dependencies": {
     "@babel/runtime": "^7.25.4",
@@ -42,11 +44,13 @@
     "@typescript-eslint/parser": "^6.14.0",
     "@vitejs/plugin-react": "^4.2.1",
     "clsx": "^2.1.1",
+    "cypress": "^14.0.0",
     "eslint": "^8.55.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.5",
     "gh-pages": "^6.2.0",
     "typescript": "^5.2.2",
-    "vite": "^5.0.8"
+    "vite": "^5.0.8",
+    "vitest": "^3.0.2"
   }
 }
