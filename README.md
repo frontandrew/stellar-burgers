@@ -2,7 +2,7 @@
 
 ![Screenshot](https://github.com/user-attachments/assets/f2a6f314-4627-4e15-b294-2b7672e2a4dd)
 
-<h2 style=width:100%;text-align:center>
+<h2 style=width:100%;text-align:center;>
   Try to use app with 
   <a href="https://stellar-burgers-flame.vercel.app">LIVE DEMO</a>
 </h2>

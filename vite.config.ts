@@ -6,6 +6,7 @@ export default defineConfig({
   base: '/',
   plugins: [react()],
   server: { port: 3002 },
+  preview: { port: 3002 },
   resolve: {
     alias: {
       api: path.resolve('src/shared/api/index'),
