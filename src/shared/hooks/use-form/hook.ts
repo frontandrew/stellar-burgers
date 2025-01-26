@@ -1,5 +1,5 @@
 import { ChangeEvent, FocusEvent, FormEvent, useCallback, useEffect, useRef, useState } from 'react'
-import { useDebounceCallback } from '@siberiacancode/reactuse'
+import { useDebounceCallback } from 'hooks'
 
 import { getInitErrors } from './utils'
 import { UseFormType } from './type'
