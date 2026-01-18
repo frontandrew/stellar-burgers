@@ -10,8 +10,8 @@
   "homepage": "https://frontandrew.github.io/stellar-burgers/",
   "type": "module",
   "scripts": {
-    "dev": "vite --open",
-    "preview": "vite preview",
+    "dev": "vite --open --host",
+    "preview": "vite preview --host",
     "build": "vite build",
     "test:lint": "eslint . --ext ts,tsx",
     "test:type": "tsc",
