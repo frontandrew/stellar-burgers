@@ -1,5 +1,5 @@
-export const API_HOST = 'https://norma.nomoreparties.space/api'
-export const WS_HOST = 'wss://norma.nomoreparties.space'
+export const API_HOST = 'https://norma.education-services.ru/api'
+export const WS_HOST = 'wss://norma.education-services.ru'
 
 export const ROOT_PATH = import.meta.env.BASE_URL
 
